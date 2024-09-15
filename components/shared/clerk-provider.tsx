@@ -1,5 +1,6 @@
 import React from 'react'
 import { ClerkProvider } from "@clerk/nextjs"
+import { dark } from '@clerk/themes'
 const ClerkWrapper = ({ children }: { children: React.ReactNode }) => {
 
     const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -9,7 +10,9 @@ const ClerkWrapper = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <ClerkProvider afterSignInUrl={"/"} publishableKey={clerkPublishableKey}>
+        <ClerkProvider appearance={{
+            baseTheme: dark
+        }} afterSignInUrl={"/"} publishableKey={clerkPublishableKey}>
             {children}
         </ClerkProvider>
     )

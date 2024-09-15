@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Zap } from 'lucide-react'
+import { BriefcaseBusiness, Heart, Menu, User, X, Zap } from 'lucide-react'
 import { ToggleTheme } from '../ToggleTheme'
 import { Button } from '../ui/button'
 import { UserButton, useUser } from '@clerk/nextjs'
@@ -14,7 +14,7 @@ const Header = () => {
         setSidebarOpen(!sidebarOpen)
     }
 
-    const { isSignedIn } = useUser()
+    const { isSignedIn, isLoaded } = useUser()
     return (
         <header className="px-4 lg:px-6 h-16 flex items-center">
             <Link className="flex items-center justify-center" href="/">
@@ -34,21 +34,38 @@ const Header = () => {
 
 
             </nav>
-            <div className='md:ml-0 ml-auto'>
+            <div className='md:ml-0 ml-auto flex items-center gap-x-1'>
                 <ToggleTheme />
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="md:hidden ml-2"
+                    className="md:hidden"
                     onClick={toggleSidebar}
                     aria-label="Toggle menu"
                 >
                     <Menu className="h-5 w-5" />
                 </Button>
-
                 {
-                    isSignedIn && <UserButton />
+                    !isLoaded && <User />
                 }
+                {
+                    isSignedIn && <UserButton>
+                        <UserButton.MenuItems>
+                            <UserButton.Link
+                                label="My Jobs"
+                                labelIcon={<BriefcaseBusiness size={15} />}
+                                href="/my-jobs"
+                            />
+                            <UserButton.Link
+                                label="Saved Jobs"
+                                labelIcon={<Heart size={15} />}
+                                href="/saved-jobs"
+                            />
+                            <UserButton.Action label="manageAccount" />
+                        </UserButton.MenuItems>
+                    </UserButton>
+                }
+
 
             </div>
             {/* Mobile Sidebar */}
