@@ -105,7 +105,7 @@ export default function ViewJobPage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 dark:text-white transition-colors duration-200">
+        <div className="flex flex-col min-h-screen dark:bg-zinc-900/80 dark:text-white transition-colors duration-200">
 
             <main className="flex-1 container mx-auto px-4 py-8">
                 <div className="max-w-3xl mx-auto">
