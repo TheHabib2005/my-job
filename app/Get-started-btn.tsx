@@ -1,6 +1,6 @@
 "use client"
 
-import { SignIn, useUser } from '@clerk/nextjs'
+import { SignUp, useUser } from '@clerk/nextjs'
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 
@@ -8,13 +8,7 @@ const GetStartedBtn = () => {
 
     const { isSignedIn } = useUser();
     const [showModal, setShowModal] = useState(false)
-
-
-
-
     const hanldeClick = () => {
-
-
 
         if (isSignedIn) {
 
@@ -37,7 +31,7 @@ const GetStartedBtn = () => {
 
                     }
                 }}>
-                    <SignIn afterSignInUrl={""} />
+                    <SignUp afterSignUpUrl={"/"} />
                 </div>
             }
             <button className="bg-white text-zinc-950 hover:bg-zinc-200 transition-colors p-3 rounded-md flex items-center" onClick={hanldeClick}>
