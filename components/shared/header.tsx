@@ -42,15 +42,7 @@ const Header = () => {
             </nav>
             <div className='md:ml-0 ml-auto flex items-center gap-x-1'>
                 <ToggleTheme />
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="md:hidden"
-                    onClick={toggleSidebar}
-                    aria-label="Toggle menu"
-                >
-                    <Menu className="h-5 w-5" />
-                </Button>
+
                 {
                     !isLoaded && isSignedIn && <User />
                 }
@@ -71,7 +63,15 @@ const Header = () => {
                         </UserButton.MenuItems>
                     </UserButton>
                 }
-
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={toggleSidebar}
+                    aria-label="Toggle menu"
+                >
+                    <Menu className="h-5 w-5" />
+                </Button>
 
             </div>
             {/* Mobile Sidebar */}
