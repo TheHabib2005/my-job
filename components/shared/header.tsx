@@ -1,6 +1,6 @@
 "use client"
 import { UserButton, useUser } from '@clerk/nextjs'
-import { BriefcaseBusiness, Heart, LogOut, Menu, User, Zap } from 'lucide-react'
+import { Heart, LogOut, Menu, User, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { ToggleTheme } from '../ToggleTheme'
@@ -49,11 +49,7 @@ const Header = () => {
                 {
                     isSignedIn && <UserButton>
                         <UserButton.MenuItems>
-                            <UserButton.Link
-                                label="My Jobs"
-                                labelIcon={<BriefcaseBusiness size={15} />}
-                                href="/my-jobs"
-                            />
+
                             <UserButton.Link
                                 label="Saved Jobs"
                                 labelIcon={<Heart size={15} />}

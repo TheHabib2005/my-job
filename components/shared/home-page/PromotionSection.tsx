@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const PromotionSection = () => (
@@ -9,15 +10,17 @@ const PromotionSection = () => (
                 <div className="w-full md:w-1/2 mb-8 md:mb-0">
                     <h2 className="text-2xl md:text-3xl font-bold mb-4">Find The One {"That's"} Right For You</h2>
                     <p className="mb-8">Discover your perfect job match with our advanced search and personalized recommendations.</p>
-                    <Button variant="secondary">Search Jobs</Button>
+                    <Button variant="secondary">
+                        <Link href={"/find-job"}>Search Jobs</Link>
+                    </Button>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-8">
                     <Image
                         src="https://jobbox-nextjs-v3.vercel.app/assets/imgs/page/homepage1/img1.png"
                         alt="Happy job seekers"
-                        width={500}
+                        width={400}
                         height={300}
-                        className="rounded-lg w-full h-auto"
+                        className="rounded-lg  h-auto"
                     />
                 </div>
             </div>

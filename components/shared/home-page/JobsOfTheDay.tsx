@@ -7,7 +7,7 @@ const JobsOfTheDay = () => (
         <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-8 dark:text-white">Jobs of the day</h2>
             <Tabs defaultValue="all">
-                <TabsList className="mb-6 flex flex-wrap gap-2">
+                <TabsList className="mb-6 flex flex-wrap gap-2 justify-start">
                     <TabsTrigger value="all">All</TabsTrigger>
                     <TabsTrigger value="design">Design</TabsTrigger>
                     <TabsTrigger value="marketing">Marketing</TabsTrigger>

@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { Toaster } from "react-hot-toast"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,6 +30,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
             {children}
           </ThemeProvider>
         </ClerkProvider>
