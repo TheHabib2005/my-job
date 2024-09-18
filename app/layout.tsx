@@ -2,6 +2,8 @@ import ClerkWrapper from "@/components/shared/clerk-provider";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import type { Metadata } from "next";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -29,7 +31,7 @@ export default function RootLayout({
       <body
 
       >
-        <ClerkWrapper>
+        {/* <ClerkWrapper>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -38,7 +40,20 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
-        </ClerkWrapper>
+        </ClerkWrapper> */}
+
+        <ClerkProvider afterSignInUrl={"/profile"} afterSignUpUrl={"/"} appearance={{
+          baseTheme: dark,
+        }} publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

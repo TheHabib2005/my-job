@@ -1,11 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isPrivateRoute = createRouteMatcher(["/profile"]);
 
 export default clerkMiddleware((auth, request) => {
   if (isPrivateRoute(request) && !auth().userId) {
-    // return NextResponse.redirect(new URL("/sign-in", request.url));
-    auth().protect();
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+    // auth().protect();
   }
 });
 

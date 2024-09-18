@@ -1,22 +1,28 @@
 "use client"
-import React, { useState } from 'react'
+import { UserButton, useUser } from '@clerk/nextjs'
+import { BriefcaseBusiness, Heart, LogOut, Menu, User, Zap } from 'lucide-react'
 import Link from 'next/link'
-import { BriefcaseBusiness, Heart, Menu, User, X, Zap } from 'lucide-react'
+import { useState } from 'react'
 import { ToggleTheme } from '../ToggleTheme'
 import { Button } from '../ui/button'
-import { UserButton, useUser } from '@clerk/nextjs'
 
+import {
+    Sheet,
+    SheetContent
+} from "@/components/ui/sheet"
 
 
 const Header = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
+
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
     }
 
     const { isSignedIn, isLoaded } = useUser()
     return (
-        <header className="px-4 lg:px-6 h-16 flex items-center">
+        <header className="px-4 lg:px-6 h-16 flex items-center bg-zinc-900/50">
             <Link className="flex items-center justify-center" href="/">
                 <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 <span className="ml-2 text-2xl font-bold text-blue-600 dark:text-blue-400">InstaJob</span>
@@ -46,7 +52,7 @@ const Header = () => {
                     <Menu className="h-5 w-5" />
                 </Button>
                 {
-                    !isLoaded && <User />
+                    !isLoaded && isSignedIn && <User />
                 }
                 {
                     isSignedIn && <UserButton>
@@ -69,25 +75,40 @@ const Header = () => {
 
             </div>
             {/* Mobile Sidebar */}
-            <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-zinc-800 shadow-lg transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
-                <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
-                    <span className="text-xl font-bold text-blue-600 dark:text-blue-400">Menu</span>
-                    <Button variant="ghost" size="icon" onClick={toggleSidebar} aria-label="Close menu">
-                        <X className="h-5 w-5" />
-                    </Button>
-                </div>
-                <nav className="p-4">
-                    <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="#" onClick={toggleSidebar}>
-                        Home
-                    </Link>
-                    <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="#" onClick={toggleSidebar}>
-                        Job Search
-                    </Link>
-                    <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="#" onClick={toggleSidebar}>
-                        My Profile
-                    </Link>
-                </nav>
-            </div>
+
+            <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+
+                <SheetContent className='border-none' >
+                    <div className={` flex flex-col  h-full w-full`}>
+                        <div className="flex justify-between items-center">
+                            <Link className="flex items-center justify-center" href="/">
+                                <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                                <span className="ml-2 text-2xl font-bold text-blue-600 dark:text-blue-400">InstaJob</span>
+                            </Link>
+
+                        </div>
+                        <nav className="p-2 mt-3 flex-1">
+                            <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="/" onClick={toggleSidebar}>
+                                Home
+                            </Link>
+                            <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="/find-job" onClick={toggleSidebar}>
+                                Job Search
+                            </Link>
+                            <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="/saved-jobs" onClick={toggleSidebar}>
+                                Saved Jobs
+                            </Link>
+                            <Link className="block py-2 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors" href="/profile" onClick={toggleSidebar}>
+                                My Profile
+                            </Link>
+                        </nav>
+                        <button className='flex  items-center p-2 bg-zinc-900 rounded-md'>
+                            <LogOut />
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </SheetContent>
+            </Sheet>
+
         </header>
     )
 }

@@ -12,9 +12,10 @@ const ClerkWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
         <ClerkProvider appearance={{
             baseTheme: dark
-        }} afterSignInUrl={"/"} publishableKey={clerkPublishableKey}>
+        }} afterSignInUrl={"/profile"} afterSignUpUrl={"/profile"} afterSignOutUrl={"/"} publishableKey={clerkPublishableKey}>
             {children}
         </ClerkProvider>
+
     )
 }
 

@@ -1,10 +1,10 @@
 "use client"
+import { Search } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 import { Button } from '../ui/button'
-import { Search } from 'lucide-react'
 import { Input } from '../ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const JobSearchForm = ({ applyFilter }: { applyFilter: () => void }) => {
     const searchParams = useSearchParams();
@@ -28,6 +28,31 @@ const JobSearchForm = ({ applyFilter }: { applyFilter: () => void }) => {
             title: "Remote-job",
         },
     ])
+    const [locationsData] = useState([
+        {
+            id: 1,
+            title: "dhaka",
+        },
+        {
+            id: 2,
+            title: "mumbi",
+        },
+        {
+            id: 3,
+            title: "bangulare",
+        },
+        {
+            id: 7,
+            title: "delhi",
+        }, {
+            id: 8,
+            title: "dubai",
+        },
+        {
+            id: 9,
+            title: "lahore",
+        },
+    ])
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
         // Here you would typically fetch job results based on the search criteria
@@ -45,6 +70,11 @@ const JobSearchForm = ({ applyFilter }: { applyFilter: () => void }) => {
         JobTypeData.map((type) => {
             return <SelectItem key={type.id} value={type.title}>{type.title}</SelectItem>
 
+        });
+    const locationOptionHtml =
+        locationsData.map((type) => {
+            return <SelectItem key={type.id} value={type.title}>{type.title}</SelectItem>
+
         })
 
 
@@ -57,12 +87,22 @@ const JobSearchForm = ({ applyFilter }: { applyFilter: () => void }) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full"
                 />
-                <Input
-                    placeholder="Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="w-full"
-                />
+                <Select defaultValue={location} onValueChange={(e) => {
+                    setLocation(e)
+
+
+                }}>
+                    <SelectTrigger className="w-full focus:ring-0 focus:ring-offset-0">
+                        <SelectValue placeholder="Loaction" />
+
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {locationOptionHtml}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
 
                 <Select defaultValue={jobType} onValueChange={(e) => {
                     setJobType(e)
@@ -71,6 +111,7 @@ const JobSearchForm = ({ applyFilter }: { applyFilter: () => void }) => {
                 }}>
                     <SelectTrigger className="w-full focus:ring-0 focus:ring-offset-0">
                         <SelectValue placeholder="Select a Job type" />
+
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
