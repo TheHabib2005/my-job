@@ -1,9 +1,4 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { delay } from "@/lib"
-import { Search, Trash2 } from "lucide-react"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
 export default async function SavedJobsPageSkeleton() {
 
