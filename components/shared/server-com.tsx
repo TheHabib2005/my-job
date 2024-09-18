@@ -29,8 +29,6 @@
 
 
 import { delay } from '@/lib'
-import React, { useEffect, useState } from 'react'
-import Test from './test'
 
 const ServerComponent = async () => {
 
